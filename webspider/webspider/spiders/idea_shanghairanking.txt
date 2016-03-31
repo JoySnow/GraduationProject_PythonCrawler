@@ -1,0 +1,20 @@
+first, use json file as the rule configraton file.
+    1.add specific xpath for each cloumn item.
+      表格每行的循环的话，就不能制定准确的xpath，所以具体是哪一行我们用循环来将行数插入到xpath
+      string中。
+    2.create one json file for one website.
+    3.for the item in Item that we don't have, we dont list it here.
+
+second, use something(list or maybe Item) to store each row of table, 
+        then storing to excel files.
+       1. we create Item with all the item we need, if we dont have it here, for
+          example: index_top, OK, we just put it blank. And we dump it to excel,
+          the column just blank, its of cource OK for it
+
+
+third, read from rules config files, genrate the spider_for_each_rules.
+        fill up the Item.
+
+明天：
+按照三部曲写spider.
+http://wuchong.me/blog/2015/05/22/running-scrapy-dynamic-and-configurable/

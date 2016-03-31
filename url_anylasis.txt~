@@ -53,46 +53,10 @@ http://www.fudanmed.com/institute/news2014-1.aspx
 a)待更新后采集（去年的数据用程序采集）
 
 
-===========================================
-5.西班牙	：5个基础表
 
 
-
-（1）世界大学排行榜（http://www.webometrics.info/en/world） 
-
-1.http://www.webometrics.info/en/world?page=29
-
-注1： 数据取前3000所。
-
- 
-
-（2）-（5）世界大学排行榜-中国地区（含大陆、港澳台）数据从图6对应链接处获得，如红框所示
-
-
-http://www.webometrics.info/en/Asia/China%20
-注1：数据取前500所（大医位于约452）
-http://www.webometrics.info/en/Asia/Macau
-http://www.webometrics.info/en/Asia/Taiwan
-http://www.webometrics.info/en/Asia/Hong%20Kong
-
-
-
-===========================================
-6.上交
-
-a)大学排行榜500所：
-http://www.shanghairanking.cn/ARWU2015.html
-b)医科大学排行榜200所：
-http://www.shanghairanking.cn/FieldMED2015.html
 
 
 A paper:
     DeepW+eb+可配置聚焦爬虫设计与实现
     http://www.docin.com/p-1027836783.html
-
-
-使用Scrapy定制可动态配置的爬虫-三部曲
-http://wuchong.me/blog/2015/05/22/running-scrapy-programmatically/
-same topic: http://kirankoduru.github.io/python/multiple-scrapy-spiders.html
-
-

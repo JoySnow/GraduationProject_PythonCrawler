@@ -1,0 +1,96 @@
+{
+    "ARWUR": {
+        "start_urls": "http://www.shanghairanking.cn/ARWU2015.html",
+        "ranking_name": "ShanghaiRankingARWU2015",
+        "table_tag": "//*[@id=\"UniversityRanking\"]//tr",
+        "columns": {
+            "1": {
+                "world_ranking_t": "th[1]/text()",
+                "world_ranking_c": "td[1]/text()"
+            },
+            "2": {
+                "school_name_c": "td[2]/a/text()",
+                "school_name_t": "th[2]/text()"
+            },
+            "3": {
+                "location_c": "td[3]/a/img[@src]",
+                "location_t": "th[3]/text()"
+            },
+            "4": {
+                "nation_ranking_c": "td[4]/div/text()",
+                "nation_ranking_t": "th[4]/text()"
+            },
+            "5": {
+                "total_score_c": "td[5]/div/text()",
+                "total_score_t": "th[5]/text()"
+            },
+            "6": {
+                "index_alumni_c": "td[6]/div/text()",
+                "index_alumni_t": "th[6]//option[1]/text()"
+            },
+            "7": {
+                "index_award_c": "td[7]/div/text()",
+                "index_award_t": "th[6]//option[2]/text()"
+            },
+            "8": {
+                "index_hici_c": "td[8]/div/text()",
+                "index_hici_t": "th[6]//option[3]/text()"
+            },
+            "9": {
+                "index_ns_c": "td[9]/div/text()",
+                "index_ns_t": "th[6]//option[4]/text()"
+            },
+            "10": {
+                "index_pub_c": "td[10]/div/text()",
+                "index_pub_t": "th[6]//option[5]/text()"
+            },
+            "11": {
+                "index_pcp_c": "td[11]/div/text()",
+                "index_pcp_t": "th[6]//option[6]/text()"
+            }
+        }
+    },
+    "FieldMED": {
+        "start_urls": "http://www.shanghairanking.cn/FieldMED2015.html",
+        "table_tag": "//*[@id=\"UniversityRanking\"]//tr",
+        "ranking_name": "ShanghaiRankingFieldMED2015",
+        "columns": {
+            "1": {
+                "world_ranking_t": "th[1]/text()",
+                "world_ranking_c": "td[1]/text()"
+            },
+            "2": {
+                "school_name_c": "td[2]/a/text()",
+                "school_name_t": "th[2]/text()"
+            },
+            "3": {
+                "location_c": "td[3]/a/img[@src]",
+                "location_t": "th[3]/text()"
+            },
+            "4": {
+                "total_score_c": "td[4]/div/text()",
+                "total_score_t": "th[4]/text()"
+            },
+            "5": {
+                "index_alumni_c": "td[5]/div/text()",
+                "index_alumni_t": "th[5]//option[1]/text()"
+            },
+            "6": {
+                "index_award_c": "td[6]/div/text()",
+                "index_award_t": "th[5]//option[2]/text()"
+            },
+            "7": {
+                "index_hici_c": "td[7]/div/text()",
+                "index_hici_t": "th[5]//option[3]/text()"
+            },
+            "8": {
+                "index_pub_c": "td[8]/div/text()",
+                "index_pub_t": "th[5]//option[4]/text()"
+            },
+            "9": {
+                "index_top_c": "td[9]/div/text()",
+                "index_top_t": "th[5]//option[5]/text()"
+            }
+        }
+    }
+}

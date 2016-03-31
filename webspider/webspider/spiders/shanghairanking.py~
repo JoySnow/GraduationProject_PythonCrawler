@@ -1,0 +1,52 @@
+# -*- coding: utf-8 -*-
+import scrapy
+
+import xlwt
+
+#class ShanghairankingItem(scrapy.Item):
+#        world_ranking = scrapy.Field()
+#        school = scrapy.Field()
+#        location = scrapy.Field()
+#        nation_ranking = scrapy.Field()
+#        total_score = scrapy.Field()
+#        index_alumni = scrapy.Field()
+#        index_award = scrapy.Field()
+#        index_hici = scrapy.Field()
+#        index_ns = scrapy.Field()
+#        index_pub = scrapy.Field()
+#        index_pcp = scrapy.Field()
+#        index_top = scrapy.Field()
+
+
+class ShanghairankingSpider(scrapy.Spider):
+    name = "shanghairanking"
+    allowed_domains = ["shanghairanking.cn"]
+    start_urls = (
+        'http://www.shanghairanking.cn/FieldMED2015.html',
+    )
+
+    def parse(self, response):
+        book = xlwt.Workbook(encoding='utf-8',style_compression=0)
+        sheet = book.add_sheet('ranking', cell_overwrite_ok=True)
+        row = col = 0
+        for sel in response.xpath('//table/tbody/tr'): //each row in table
+            if (row == 0):                          //first row for title
+                for index in sel.xpath('th'):     //each column in table
+                    #item.appand(col.xpath('text()').extract())
+                    if index.xpath('form'):
+                        data = index.xpath('form//option[@value]').extract()
+                    else:
+                        data = index.xpath('text()').extract()
+                    sheet.write(row, col, data)
+                    col += 1
+            else:                                   //the content row
+                #for index in sel.xpath('td')
+                #sheet.write(row, )
+                TBD:
+                    dont know how to put it, if using loop, then lots of 'if' will
+                    come, and its so detailed selections.
+                    So, How to put it ??????
+
+            row += 1
+            col = 0
+        //end of the mai for loop
