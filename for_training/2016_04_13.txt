@@ -1,21 +1,28 @@
-# This is the first training meeting.
-# Time: 2016.04.06 13:30
+# This is the second training meeting.
+# Time: 2016.04.13 15:10
 
 Before:
-    Know the basic of Python Language.
+    Practice with example in tutorial of doc.scrapy.
 
 This week:
-    Start with Scrapy.
+    Continue with Scrapy.
 
 ======================================================
 TASK ONE ***
 =============
 
-doc.scrapy.org
-    Finish the "First Step" Part.
-    Try each example by your self.
-    Understand as more as possible.
-
+    doc.scrapy.org
+      / \
+       | NEED other parts of it
+       |
+Selector in doc.scrapy.org:
+    http://doc.scrapy.org/en/latest/topics/selectors.html
+       |
+       | NEED to know about xpath or css
+      \ /
+    XPath doc:
+        CN: http://www.w3school.com.cn/xpath/index.asp
+        EN: http://www.w3schools.com/xsl/xpath_intro.asp
 
 ======================================================
 TASK TWO
@@ -24,8 +31,7 @@ TASK TWO
 If you could get time to learn how to use github, that will be great.
 If not, it's just fine.
 
-TASK ONE is more important.
-
+TASK ONE is the STAR of this week.
 
 ======================================================
 TASK THREE
