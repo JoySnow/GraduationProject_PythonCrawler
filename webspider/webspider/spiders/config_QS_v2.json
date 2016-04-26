@@ -1,0 +1,64 @@
+{
+    "QSARWU2015": {
+        "start_urls": "http://www.topuniversities.com/university-rankings/world-university-rankings/2015#sorting=rank+region=+country=+faculty=+stars=false+search=",
+        "ranking_name": "QSARWU2015",
+        "table_tag": "//*[@id=\"ranking-wp\"]/div[3]/div/div[3]",
+        "columns": {
+            "1": {
+                "content": "",
+                "title": "div[3]/div[1]/span[1]/span[1]/text()"
+            },
+            "2": {
+                "content": "",
+                "title": "//*[@id=\"order-values\"]/option/text()"
+            },
+            "3": {
+                "content": "",
+                "title": "div[3]/div[1]/span[1]/span[2]/text()"
+            },
+            "4": {
+                "content": "",
+                "title": "div[3]/div[1]/span[1]/span[3]/text()"
+            },
+            "5": {
+                "content": "",
+                "title": "div[3]/div[1]/span[1]/span[4]/text()"
+            },
+            "6": {
+                "content": "",
+                "title": ""
+            },
+            "7": {
+                "content": "",
+                "title": ""
+            }
+        }
+    },
+    "QSMED2016": {
+        "start_urls": "http://www.topuniversities.com/university-rankings/university-subject-rankings/2016/medicine#sorting=rank+region=+country=+faculty=+stars=fa",
+        "table_tag": "",
+        "ranking_name": "QSMED2016",
+        "columns": {
+            "1": {
+                "content": "",
+                "title": ""
+            },
+            "2": {
+                "content": "",
+                "title": ""
+            },
+            "3": {
+                "content": "",
+                "title": ""
+            },
+            "4": {
+                "content": "",
+                "title": ""
+            },
+            "5": {
+                "content": "",
+                "title": ""
+            }
+        }
+    }
+}

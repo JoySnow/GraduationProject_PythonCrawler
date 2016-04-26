@@ -1,0 +1,64 @@
+{
+    "ARWUR": {
+        "start_urls": "",
+        "ranking_name": "",
+        "table_tag": "",
+        "columns": {
+            "1": {
+                "content": "",
+                "title": ""
+            },
+            "2": {
+                "content": "",
+                "title": ""
+            },
+            "3": {
+                "content": "",
+                "title": ""
+            },
+            "4": {
+                "content": "",
+                "title": ""
+            },
+            "5": {
+                "content": "",
+                "title": ""
+            },
+            "6": {
+                "content": "",
+                "title": ""
+            },
+            "7": {
+                "content": "",
+                "title": ""
+            }
+        }
+    },
+    "FieldMED": {
+        "start_urls": "",
+        "table_tag": "",
+        "ranking_name": "",
+        "columns": {
+            "1": {
+                "content": "",
+                "title": ""
+            },
+            "2": {
+                "content": "",
+                "title": ""
+            },
+            "3": {
+                "content": "",
+                "title": ""
+            },
+            "4": {
+                "content": "",
+                "title": ""
+            },
+            "5": {
+                "content": "",
+                "title": ""
+            }
+        }
+    }
+}

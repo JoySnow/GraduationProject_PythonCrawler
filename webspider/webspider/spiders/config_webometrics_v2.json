@@ -1,0 +1,77 @@
+{
+    "ARWUR": {
+        "start_urls": "http://www.webometrics.info/en/world",
+        "next_page": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/div/ul/li[@class=\"pager-next\"]/a/@href",
+        "total_pages": "30",
+        "ranking_name": "ARUwebometrics",
+        "table_tag": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/tbody/tr",
+        "columns": {
+            "1": {
+                "content": "td[1]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[1]/a/text()"
+            },
+            "2": {
+                "content": "td[2]/a/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[2]/a/text()"
+            },
+            "3": {
+                "content": "td[4]/center/img/@src",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[4]/text()"
+            },
+            "4": {
+                "content": "td[5]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[5]/a/text()"
+            },
+            "5": {
+                "content": "td[6]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[6]/a/text()"
+            },
+            "6": {
+                "content": "td[7]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[7]/a/text()"
+            },
+            "7": {
+                "content": "td[8]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[8]/a/text()"
+            }
+        }
+    },
+    "CHINAUR": {
+        "start_urls": "http://www.webometrics.info/en/Asia/China%20",
+        "next_page": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/div/ul/li[@class=\"pager-next\"]/a/@href",
+        "total_pages": "5",
+        "ranking_name": "CNUwebometrics",
+        "table_tag": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/tbody/tr",
+        "columns": {
+            "1": {
+                "content": "td[1]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[1]/text()"
+            },
+            "2": {
+                "content": "td[2]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[2]/a/text()"
+            },
+            "3": {
+                "content": "td[3]/a/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[3]/a/text()"
+            },
+            "4": {
+                "content": "td[5]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[5]/a/text()"
+            },
+            "5": {
+                "content": "td[6]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[6]/a/text()"
+            },
+            "6": {
+                "content": "td[7]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[7]/a/text()"
+            },
+            "7": {
+                "content": "td[8]/center/text()",
+                "title": "/html/body/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div/div/div/table[2]/thead/tr/th[8]/a/text()"
+            }
+        }
+    }
+
+}

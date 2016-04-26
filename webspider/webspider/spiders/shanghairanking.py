@@ -24,14 +24,14 @@ class ShanghairankingSpider(CrawlSpider):
     name = "Shanghairanking"
 
     def __init__(self, rule, worksheet):
-       self.rule = rule
-       self.name = self.rule["ranking_name"]
-       print "=============================="
-       print "self.rule[start_urls]: ", self.rule["start_urls"]
-       print "type(): ", type(self.rule["start_urls"])
-       self.start_urls = [self.rule["start_urls"],]
+        self.rule = rule
+        self.name = self.rule["ranking_name"]
+        print "=============================="
+        print "self.rule[start_urls]: ", self.rule["start_urls"]
+        print "type(): ", type(self.rule["start_urls"])
+        self.start_urls = [self.rule["start_urls"],]
 
-       self.worksheet = worksheet
+        self.worksheet = worksheet
 
     def parse(self, response):
         row_index = 0
