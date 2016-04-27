@@ -1,7 +1,7 @@
 {
     "ARWUR": {
         "start_urls": "http://www.usnews.com/education/best-global-universities/rankings",
-	"next_page": "http://www.usnews.com/education/best-global-universities/rankings?page=2",
+	    "next_page": "http://www.usnews.com/education/best-global-universities/rankings?page=2",
         "ranking_name": "ARWUR-usnews",
         "table_tag": "",
         "columns": {
@@ -25,7 +25,7 @@
     },
     "FieldMED": {
         "start_urls": "http://www.usnews.com/education/best-global-universities/clinical-medicine",
-	"next_pages": "http://www.usnews.com/education/best-global-universities/clinical-medicine?page=2",
+    	"next_pages": "http://www.usnews.com/education/best-global-universities/clinical-medicine?page=2",
         "table_tag": "",
         "ranking_name": "MEDUR-usnews",
         "columns": {

@@ -1,0 +1,5 @@
+我要修改 nseac & usnew 的 config 文件，完成这俩爬虫。
+nseac: 主要是多个start_url, 每个要有一个独立sheet的问题。
+usnews: 翻页，?page=1此类。
+times: 搞定点击的问题，再谈翻页。
+
