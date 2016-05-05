@@ -1,7 +1,11 @@
 {
     "CHINAUR": {
         "start_urls": ["http://www.nseac.com/html/14/666311.html", "http://www.nseac.com/html/14/666312.html", "http://www.nseac.com/html/14/666313.html"],
-	    "next_page": "WTF????",
+	    "next_page": ["",
+                    "http://www.nseac.com/html/14/666312.html",
+                    "",
+                    "http://www.nseac.com/html/14/666313.html",
+                    ""],
         "ranking_name": "CNURnseac",
         "table_tag": "",
         "columns": {

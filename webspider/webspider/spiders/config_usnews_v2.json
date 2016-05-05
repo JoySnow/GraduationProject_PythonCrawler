@@ -1,49 +1,49 @@
 {
-    "ARWUR": {
-        "start_urls": "http://www.usnews.com/education/best-global-universities/rankings",
-    	"next_page": "http://www.usnews.com/education/best-global-universities/rankings?page=2",
+    "ARWURusnews": {
+        "start_urls": ["http://www.usnews.com/education/best-global-universities/rankings"],
+    	"next_page_p": ["http://www.usnews.com/education/best-global-universities/rankings?page=NUM", "2", "4"],
         "ranking_name": "ARWUR-usnews",
-        "table_tag": "/html/body/div[2]/div[3]/div[2]/div[4]/div/div[1]/div",
+        "table_tag": "/html/body/div[2]/div[3]/div[2]/div[4]/div/div[1]/div[@class=\"sep\"]",
         "columns": {
             "1": {
                 "content": "div[2]/span/text()",
-                "title": ""
+                "title": "None"
             },
             "2": {
                 "content": "div[3]/h2/a/text()",
-                "title": ""
+                "title": "None"
             },
             "3": {
                 "content": "div[3]/div/span[1]/text()",
-                "title": ""
+                "title": "None"
             },
             "4": {
                 "content": "div[1]/div[1]/text()",
-                "title": ""
+                "title": "None"
             }
         }
     },
     "FieldMED": {
-        "start_urls": "http://www.usnews.com/education/best-global-universities/clinical-medicine",
-	    "next_pages": "http://www.usnews.com/education/best-global-universities/clinical-medicine?page=2",
-        "table_tag": "/html/body/div[2]/div[3]/div[2]/div[4]/div/div[1]/div",
+        "start_urls": ["http://www.usnews.com/education/best-global-universities/clinical-medicine"],
+    	"next_page_p": ["http://www.usnews.com/education/best-global-universities/clinical-medicine?page=NUM", "2", "3"],
+        "table_tag": "/html/body/div[2]/div[3]/div[2]/div[4]/div/div[1]/div[@class=\"sep\"]",
         "ranking_name": "MEDUR-usnews",
         "columns": {
             "1": {
                 "content": "div[2]/span/text()",
-                "title": ""
+                "title": "None"
             },
             "2": {
                 "content": "div[3]/h2/a/text()",
-                "title": ""
+                "title": "None"
             },
             "3": {
                 "content": "div[3]/div[1]/span[1]/text()",
-                "title": ""
+                "title": "None"
             },
             "4": {
                 "content": "div[1]/div[1]/text()",
-                "title": ""
+                "title": "None"
             }
         }
     }
