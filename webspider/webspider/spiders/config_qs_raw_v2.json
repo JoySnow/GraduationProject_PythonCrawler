@@ -32,24 +32,24 @@
         "ranking_name": "QSMED2016",
         "columns": {
             "1": {
-                "content": "",
-                "title": ""
+                "content": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/tbody/tr[1]/td[1]/div/div/span[2]",
+                "title": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/thead/tr[1]/th/span/span[1]"
             },
             "2": {
-                "content": "",
-                "title": ""
+                "content": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/tbody/tr[1]/td[2]/div/div/span[2]/a",
+                "title": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/thead/tr[1]/th/span/span[2]"
             },
             "3": {
-                "content": "",
-                "title": ""
+                "content": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/tbody/tr[1]/td[3]/div/img",
+                "title": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/thead/tr[1]/th/span/span[3]"
             },
             "4": {
-                "content": "",
-                "title": ""
+                "content": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/tbody/tr[1]/td[4]/div",
+                "title": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/thead/tr[1]/th/span/span[4]"
             },
             "5": {
-                "content": "",
-                "title": ""
+                "content": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/tbody/tr[1]/td[1]/div/div/span[3]",
+                "title": "/html/body/div[2]/div/div/div/div/div[1]/div/div/div/div[1]/div/div/div[9]/div/div/div[4]/div/div[2]/table/thead/tr[2]/td[1]/div/div/span/span[1]/span"
             }
         }
     }
