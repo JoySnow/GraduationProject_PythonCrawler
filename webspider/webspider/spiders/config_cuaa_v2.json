@@ -1,7 +1,11 @@
 {
+    "XLS_FILENAME": "CUAA",
     "CHINAUR001-100": {
         "start_urls": ["http://www.cuaa.net/cur/2015/index_700"],
-        "next_pages": [],
+        "next_page": [
+                "URL_LIST", 
+                []
+        ],        
         "ranking_name": "CNUR001-100-cuaa",
         "table_tag": "/html/body/table[3]/tbody/tr[5]/td/div[9]/table/tbody/tr[position()>3]",
         "columns": {
@@ -57,11 +61,14 @@
     },
     "CHINAUR101-700": {
         "start_urls": ["http://www.cuaa.net/cur/2015/03_700"],
-		"next_pages": ["http://www.cuaa.net/cur/2015/04_700",
+        "next_page": [
+                "URL_LIST", 
+                ["http://www.cuaa.net/cur/2015/04_700",
 		              "http://www.cuaa.net/cur/2015/05_700",
 		              "http://www.cuaa.net/cur/2015/06",
        		          "http://www.cuaa.net/cur/2015/07",
-		              "http://www.cuaa.net/cur/2015/08" ],
+		              "http://www.cuaa.net/cur/2015/08" ]
+        ],
         "table_tag": "/html/body/table[3]/tbody/tr[4]/td/div/table/tbody/tr[position()>2]",
         "ranking_name": "CNUR101-700-cuaa",
         "columns": {
@@ -117,7 +124,10 @@
     },
     "CHINAMEDUR100": {
         "start_urls": ["http://www.cuaa.net/cur/2015/bkzypm/15.shtml"],
-        "next_pages": [],
+        "next_page": [
+                "URL_LIST", 
+                []
+        ],        
         "ranking_name": "CNMEDUR100-cuaa",
         "table_tag": "/html/body/table[3]/tbody/tr[5]/td/div[1]/table/tbody/tr[position()>2]",
         "columns": {
@@ -165,7 +175,10 @@
     },
     "CHINACLMEDUR67": {
         "start_urls": ["http://www.cuaa.net/cur/2015/bkzypm/15.shtml"],
-        "next_pages": [],
+        "next_page": [
+                "URL_LIST", 
+                []
+        ],        
         "ranking_name": "CNCLMEDUR67-cuaa",
         "table_tag": "/html/body/table[3]/tbody/tr[5]/td/div[2]/table/tbody/tr[position()>2]",
         "columns": {
