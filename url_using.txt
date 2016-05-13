@@ -2,6 +2,10 @@
 ##############################################################################
 
 1.QS(dynamic)(DONE)
+
+new: no
+
+2015/16:
     a)QS排行榜918所（由于排行榜本身排序有问题，后续可能会有一定偏差）：
         http://www.topuniversities.com/university-rankings/world-university-rankings/2015#sorting=rank+region=+country=+faculty=+stars=false+search=
     b)QS医学排行榜381所：
@@ -10,6 +14,14 @@
 ##############################################################################
 
 2.校友会网(static)(DONE)
+
+2016:
+    a)总榜
+    http://www.cuaa.net/cur/2016/
+    b)没找到对应的医学相关的。
+    c)
+
+2015:
     a)中国大学排行榜703所（1~100，后续表格可从网页中继续选择）：
         001-100: http://www.cuaa.net/cur/2015/index_700
         101-200: http://www.cuaa.net/cur/2015/03_700
@@ -32,6 +44,10 @@
 ##############################################################################
 
 3.上交(static)(DONE)
+
+new: no
+
+2015:
     a)大学排行榜500所：
         http://www.shanghairanking.cn/ARWU2015.html
     b)医科大学排行榜200所：
@@ -41,6 +57,9 @@
 
 4.西班牙(dynamic: source-code different from crawled html.)(DONE)
 
+new: no
+
+version 2016.1.1:
     （1）世界大学排行榜（http://www.webometrics.info/en/world）
         注1： 数据取前3000所。
         http://www.webometrics.info/en/world?sort=asc&order=ranking
@@ -90,10 +109,9 @@
 6.TIMES（已经出新版，需更新：2015~2016年）
     排名    院校名称    国家/地区   得分
 
-    Tips: need a radio select post option.
-        maybe we can select the "Display ??? records per page" to "ALL", then we can get all items in one url crawl.
-    artical may help: http://www.tuicool.com/articles/nQ7Zbiq
+new: no
 
+2015-2016:
     a)Times世界大学排行榜：（801所）
 
         start_url:
@@ -107,6 +125,10 @@
 ##############################################################################
 
 7. USNews世界大学排行榜
+
+new: no
+
+2016:
     a)USNews世界大学排行榜
         排名    院校名称    国家/地区   得分
         start_url:
@@ -122,6 +144,10 @@
 ##############################################################################
 
 8. 复旦大学医院排行榜
+
+new: no
+
+2014:
     a) 复旦大学-****年度最佳专科排行榜
         排名    医院    所属院校    总分    专科类别得分    专科1得分   专科2
         1除最后一列，其他列数据与网上数据一致。链接：http://www.fudanmed.com/institute/news2014-1.aspx

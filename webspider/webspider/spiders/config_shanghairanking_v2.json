@@ -67,7 +67,7 @@
                 "title": "/html/body/div[3]/div[4]/div[1]/table/tbody/tr[1]/th[2]/text()"
             },
             "3": {
-                "content": "td[3]/a/img[@src]",
+                "content": "td[3]/img[@src]",
                 "title": "/html/body/div[3]/div[4]/div[1]/table/tbody/tr[1]/th[3]/text()"
             },
             "4": {

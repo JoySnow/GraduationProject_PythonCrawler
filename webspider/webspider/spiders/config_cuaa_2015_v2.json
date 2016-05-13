@@ -1,12 +1,9 @@
 {
-    "XLS_FILENAME": "CUAA",
-    "CHINAUR001-100": {
+    "XLS_FILENAME": "CUAA2015",
+    "CHINAUR001-100cuaa2015": {
         "start_urls": ["http://www.cuaa.net/cur/2015/index_700"],
-        "next_page": [
-                "URL_LIST", 
-                []
-        ],        
-        "ranking_name": "CNUR001-100-cuaa",
+        "next_page": ["NONE"],
+        "ranking_name": "CNUR001-100-cuaa2015",
         "table_tag": "/html/body/table[3]/tbody/tr[5]/td/div[9]/table/tbody/tr[position()>3]",
         "columns": {
             "1": {
@@ -59,7 +56,7 @@
             }
         }
     },
-    "CHINAUR101-700": {
+    "CHINAUR101-700cuaa2015": {
         "start_urls": ["http://www.cuaa.net/cur/2015/03_700"],
         "next_page": [
                 "URL_LIST", 
@@ -70,7 +67,7 @@
 		              "http://www.cuaa.net/cur/2015/08" ]
         ],
         "table_tag": "/html/body/table[3]/tbody/tr[4]/td/div/table/tbody/tr[position()>2]",
-        "ranking_name": "CNUR101-700-cuaa",
+        "ranking_name": "CNUR101-700-cuaa2015",
         "columns": {
             "1": {
                 "content": "td[1]/p/text()",
@@ -122,13 +119,10 @@
             }
         }
     },
-    "CHINAMEDUR100": {
+    "CHINAMEDUR-cuaa2015": {
         "start_urls": ["http://www.cuaa.net/cur/2015/bkzypm/15.shtml"],
-        "next_page": [
-                "URL_LIST", 
-                []
-        ],        
-        "ranking_name": "CNMEDUR100-cuaa",
+        "next_page": ["NONE"],
+        "ranking_name": "CNMEDUR100-cuaa2015",
         "table_tag": "/html/body/table[3]/tbody/tr[5]/td/div[1]/table/tbody/tr[position()>2]",
         "columns": {
             "1": {
@@ -173,13 +167,10 @@
             }
         }
     },
-    "CHINACLMEDUR67": {
+    "CHINACLMEDUR67cuaa2015": {
         "start_urls": ["http://www.cuaa.net/cur/2015/bkzypm/15.shtml"],
-        "next_page": [
-                "URL_LIST", 
-                []
-        ],        
-        "ranking_name": "CNCLMEDUR67-cuaa",
+        "next_page": ["NONE"],
+        "ranking_name": "CNCLMEDUR67-cuaa2015",
         "table_tag": "/html/body/table[3]/tbody/tr[5]/td/div[2]/table/tbody/tr[position()>2]",
         "columns": {
             "1": {

@@ -1,0 +1,29 @@
+# 05132016:
+    <img> of Shanghai.
+    nseac2016 > ARW : sometimes lost pages, dont know why?
+
+
+# 05122016:
+saw 3 blank pages in broswer.
+
+Checking Result of the xls:
+
+    FUDANMEDranking-20160512213940.xls  > FieldALL : empty
+    NSEAC2016ranking-20160512213940.xls > CHINAARU-nseac2016 : some pages lost
+    SHANGHAIRANKINGranking-20160512213940.xls > ARWUR : empty
+    TIMESranking-20160512213940.xls  >  ARWUR : empty
+
+runned the 4 jsons together again:
+
+    Fudan is ok now,
+    Nseac still pages lost,
+    Shanghai is ok,
+    Times is ok.
+
+So, The question is,
+    why they got empty when we crawl all together???
+        No, dont't know yet
+    & what happened to Nseac???
+        OK, change all xpath div[5] to div[class=container][3].
+
+

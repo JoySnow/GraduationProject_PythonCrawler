@@ -25,8 +25,8 @@ logging.info("=============================================================")
 json_file_shanghai = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_shanghairanking_v2.json")
 json_file_qs = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_qs_v2.json")
 json_file_webometrics = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_webometrics_v2.json")
-json_file_cuaa = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_cuaa_v2.json")
-#json_file_nseac = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_nseac_v2.json")
+json_file_cuaa_2015 = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_cuaa_2015_v2.json")
+json_file_cuaa_2016 = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_cuaa_2016_v2.json")
 json_file_nseac_2015 = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_nseac_2015_v2.json")
 json_file_nseac_2016 = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_nseac_2016_v2.json")
 json_file_usnews = file("/home/joy/Git/GraduationProject_PythonCrawler/webspider/webspider/spiders/config_usnews_v2.json")
@@ -36,8 +36,8 @@ json_file_fudanmed = file("/home/joy/Git/GraduationProject_PythonCrawler/webspid
 config_rules_shanghai = json.load(json_file_shanghai)
 config_rules_qs = json.load(json_file_qs)
 config_rules_webometrics = json.load(json_file_webometrics)
-config_rules_cuaa = json.load(json_file_cuaa)
-#config_rules_nseac = json.load(json_file_nseac)
+config_rules_cuaa_2015 = json.load(json_file_cuaa_2015)
+config_rules_cuaa_2016 = json.load(json_file_cuaa_2016)
 config_rules_nseac_2015 = json.load(json_file_nseac_2015)
 config_rules_nseac_2016 = json.load(json_file_nseac_2016)
 config_rules_usnews = json.load(json_file_usnews)
@@ -47,8 +47,8 @@ config_rules_fudanmed = json.load(json_file_fudanmed)
 json_file_shanghai.close()
 json_file_qs.close()
 json_file_webometrics.close()
-json_file_cuaa.close()
-#json_file_nseac.close()
+json_file_cuaa_2015.close()
+json_file_cuaa_2016.close()
 json_file_nseac_2015.close()
 json_file_nseac_2016.close()
 json_file_usnews.close()
@@ -58,14 +58,14 @@ json_file_fudanmed.close()
 config_rules_all = {}
 #config_rules_all[ config_rules_times["XLS_FILENAME"] ] = config_rules_times
 #config_rules_all[ config_rules_usnews["XLS_FILENAME"] ] = config_rules_usnews
-#config_rules_all[ config_rules_cuaa["XLS_FILENAME"] ] = config_rules_cuaa
-#config_rules_all[ config_rules_nseac["XLS_FILENAME"] ] = config_rules_nseac
+#config_rules_all[ config_rules_cuaa_2015["XLS_FILENAME"] ] = config_rules_cuaa_2015
+#config_rules_all[ config_rules_cuaa_2016["XLS_FILENAME"] ] = config_rules_cuaa_2016
 #config_rules_all[ config_rules_nseac_2015["XLS_FILENAME"] ] = config_rules_nseac_2015
-config_rules_all[ config_rules_nseac_2016["XLS_FILENAME"] ] = config_rules_nseac_2016
+#config_rules_all[ config_rules_nseac_2016["XLS_FILENAME"] ] = config_rules_nseac_2016
 #config_rules_all[ config_rules_webometrics["XLS_FILENAME"] ] = config_rules_webometrics
 #config_rules_all[ config_rules_qs["XLS_FILENAME"] ] = config_rules_qs
 #config_rules_all[ config_rules_fudanmed["XLS_FILENAME"] ] = config_rules_fudanmed
-#config_rules_all[ config_rules_shanghai["XLS_FILENAME"] ] = config_rules_shanghai
+config_rules_all[ config_rules_shanghai["XLS_FILENAME"] ] = config_rules_shanghai
 
 # storing workbooks for all website
 WorkBooks = {}

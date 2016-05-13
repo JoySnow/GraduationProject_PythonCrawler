@@ -132,6 +132,8 @@ class RankingSpider(CrawlSpider):
 
         # for the content of the table
         if self.flag[0] != "NONE": # has special cell to reget in flag
+            if len(browser_response.xpath(self.rule["table_tag"])) == 0:
+                logging.info("SPECIAL: select is none here, url: %s" % url.response)
             for select in browser_response.xpath(self.rule["table_tag"]):
                 #logging.info("select: %s" % select)
                 #logging.info("self.rule[\"columns\"]: %s" % self.rule["columns"])
