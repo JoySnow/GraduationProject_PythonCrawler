@@ -125,7 +125,8 @@ class RankingSpider(CrawlSpider):
             for col in self.rule["columns"]:
                 if self.rule["columns"][col]["title"] != "None":
                     data = browser_response.xpath(self.rule["columns"][col]["title"]).extract()
-                    #print "data: ", data
+                    #logging.info("self.rule[\"columns\"]: %s" % self.rule["columns"])
+                    #logging.info("data: %s" % data)
                     self.worksheet.write(row_index, int(col)-1, data)
             row_index += 1
 
@@ -138,12 +139,15 @@ class RankingSpider(CrawlSpider):
                     data = select.xpath(self.rule["columns"][col]["content"]).extract()
                     # for QS and FUDAN:
                     #   reget data for special content
-                    if data == [] and col in self.flag[1]["content_special"][0]:
+                    if "content_special" in self.flag[1] and data == [] \
+                            and col in self.flag[1]["content_special"][0]:
                         data = select.xpath(self.rule["columns"][col]["content_for_special"]).extract()
                         #logging.info("data: %s" % data)
                     # for QS only:
                     #   count stars for each star cell
-                    if self.flag[0] == "for_QS" and data != [] and col in self.flag[1]["count_stars"][0]:
+                    if self.flag[0] == "for_QS" \
+                            and "count_stars" in self.flag[1] and data != [] \
+                            and col in self.flag[1]["count_stars"][0]:
                         #logging.info("star col data: %s" % data)
                         if "plus" in data[-1]:
                             data = [ str(len(data)-1), "+"]

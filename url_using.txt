@@ -61,10 +61,29 @@
 ##############################################################################
 
 5.武汉大学（数据来源于大医）(static)
-    a)中国大学排行榜900所
+    ** for MED & CLMED in 2015&2016, there are some dynamic blocks in HTML,
+    ** and the default xpath can not work well all the time.
+    ** so we changed their xpath manualy, make it work now.
+    ** just write it in doc.
+    a)2015: in config_nseac_2015_v2.json
+        1)中国大学排行榜900所
         http://www.nseac.com/html/14/666311.html （001~300）
         http://www.nseac.com/html/14/666312.html （301~600）
         http://www.nseac.com/html/14/666313.html （601~900）
+        2)MED
+        http://www.nseac.com/html/258/665742.html
+        3)CLMED
+        http://www.nseac.com/html/261/665958.html
+
+    b)2016: in config_nseac_2016_v2.json
+        1)中国大学排行榜
+        http://www.nseac.com/html/263/676578.html
+        http://www.nseac.com/html/263/676579.html
+        http://www.nseac.com/html/263/676580.html
+        2)MED
+        http://www.nseac.com/html/258/676483.html
+        3)CLMED
+        http://www.nseac.com/html/261/676055.html
 
 ##############################################################################
 
