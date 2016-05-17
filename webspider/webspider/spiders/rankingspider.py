@@ -9,7 +9,6 @@ from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.common.exceptions import TimeoutException
 import time
-
 import xlwt
 import logging
 
@@ -29,7 +28,6 @@ class RankingSpider(CrawlSpider):
         self.logging.info("self.rule[start_urls]: %s" % self.rule["start_urls"])
         self.start_urls = self.rule["start_urls"]
         # slef.next_page is a defined array.
-        #self.next_page = self.rule["next_page"]
         self.next_page = self.rule["next_page"] \
                             if ("next_page" in self.rule) else ["NONE"]
         self.logging.info("#### self.next_page %s" % self.next_page)
@@ -40,9 +38,9 @@ class RankingSpider(CrawlSpider):
         self.logging.info("Finish the __init__ method ... ")
 
     def __del__(self):
-        self.logging.info("=============================================================")
+        self.logging.info("===================================================")
         self.logging.info("logging end here ...")
-        self.logging.info("=============================================================")
+        self.logging.info("===================================================")
         self.browser.quit()
 
     def parse(self, response):
@@ -84,7 +82,7 @@ class RankingSpider(CrawlSpider):
                 self.browser.find_element_by_id("errorTryAgain")
                 self.logging.info("########## refresh page ...")
                 self.logging.info("########## response.url %s" % response.url)
-                time.sleep(5)
+                time.sleep(10)
                 self.browser.refresh()
                 retry_times -= 1
             except Exception,e:
@@ -106,7 +104,6 @@ class RankingSpider(CrawlSpider):
 
 
         browser_response = Selector(text = self.browser.page_source)
-        #browser_response = response
         logging.info("type(browser_response): %s" % type(browser_response))
 
         # broswer is ready now ...
@@ -124,8 +121,10 @@ class RankingSpider(CrawlSpider):
         if write_title:
             for col in self.rule["columns"]:
                 if self.rule["columns"][col]["title"] != "None":
-                    data = browser_response.xpath(self.rule["columns"][col]["title"]).extract()
-                    #logging.info("self.rule[\"columns\"]: %s" % self.rule["columns"])
+                    data = browser_response.xpath(\
+                            self.rule["columns"][col]["title"]).extract()
+                    #logging.info("self.rule[\"columns\"]: %s" \
+                    #                % self.rule["columns"])
                     #logging.info("data: %s" % data)
                     self.worksheet.write(row_index, int(col)-1, data)
             row_index += 1
@@ -133,17 +132,21 @@ class RankingSpider(CrawlSpider):
         # for the content of the table
         if self.flag[0] != "NONE": # has special cell to reget in flag
             if len(browser_response.xpath(self.rule["table_tag"])) == 0:
-                logging.info("SPECIAL: select is none here, url: %s" % url.response)
+                self.logging.info("SPECIAL: select is none here, url: %s" \
+                            % response.url)
             for select in browser_response.xpath(self.rule["table_tag"]):
                 #logging.info("select: %s" % select)
-                #logging.info("self.rule[\"columns\"]: %s" % self.rule["columns"])
+                #logging.info("self.rule[\"columns\"]: %s" \
+                #            % self.rule["columns"])
                 for col in self.rule["columns"]:
-                    data = select.xpath(self.rule["columns"][col]["content"]).extract()
+                    data = select.xpath(\
+                            self.rule["columns"][col]["content"]).extract()
                     # for QS and FUDAN:
                     #   reget data for special content
                     if "content_special" in self.flag[1] and data == [] \
                             and col in self.flag[1]["content_special"][0]:
-                        data = select.xpath(self.rule["columns"][col]["content_for_special"]).extract()
+                        data = select.xpath(self.rule["columns"]\
+                                [col]["content_for_special"]).extract()
                         #logging.info("data: %s" % data)
                     # for QS only:
                     #   count stars for each star cell
@@ -160,11 +163,16 @@ class RankingSpider(CrawlSpider):
                     self.worksheet.write(row_index, int(col)-1, data)
                 row_index += 1
         else: # self.flag[0] is "NONE"
+            if len(browser_response.xpath(self.rule["table_tag"])) == 0:
+                logging.info("SPECIAL: select is none here, url: %s" \
+                            % response.url)
             for select in browser_response.xpath(self.rule["table_tag"]):
                 #logging.info("select: %s" % select)
-                #logging.info("self.rule[\"columns\"]: %s" % self.rule["columns"])
+                #logging.info("self.rule[\"columns\"]: %s" \
+                #            % self.rule["columns"])
                 for col in self.rule["columns"]:
-                    data = select.xpath(self.rule["columns"][col]["content"]).extract()
+                    data = select.xpath(\
+                            self.rule["columns"][col]["content"]).extract()
                     #logging.info("data: %s" % data)
                     self.worksheet.write(row_index, int(col)-1, data)
                 row_index += 1
@@ -172,6 +180,7 @@ class RankingSpider(CrawlSpider):
         crawld_pages += 1
         logging.info("finished crawling data of this page ...")
 
+        ###########################################
         ###########################################
         # next_page need to be crawl ...
 
@@ -198,7 +207,7 @@ class RankingSpider(CrawlSpider):
                     logging.info("No more next_page to crawl ...")
                     logging.info("I will quit my parse here ... Thanks ...")
 
-        # For CUAA & USEAC:
+        # For CUAA & NSEAC:
         #   for each in url_list, go get it.
         #   IN CONFIG:
         #       "next_page": [
@@ -225,10 +234,11 @@ class RankingSpider(CrawlSpider):
         #           ["url_pattern", "start_page", "end_page"]
         #       ],
         if self.next_page[0] == "URL_PATTERN":
-            if self.next_page[1] and ( crawld_pages < int(self.next_page[1][2]) ):
+            if self.next_page[1] and (crawld_pages < int(self.next_page[1][2])):
                 # replace NUM in url_pattern with page_number in range
                 # AND assume that NUM in url_pattern here
-                next_url = self.next_page[1][0].replace("NUM", str(crawld_pages+1))
+                next_url = self.next_page[1][0].replace(\
+                                                "NUM", str(crawld_pages+1))
                 request = scrapy.Request(next_url, callback=self.parse)
                 request.meta['write_title'] = False
                 request.meta['start_row'] = row_index
@@ -250,18 +260,18 @@ class RankingSpider(CrawlSpider):
         while(1):
             try:
                 wait = WebDriverWait(self.browser, 20)
-                element = \
-                     wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="ranking-wp"]/p/a')))
+                element = wait.until(EC.element_to_be_clickable(( \
+                            By.XPATH, '//*[@id="ranking-wp"]/p/a')))
                 count_click_loops += 1
-                self.logging.info("######## count_click_loops : %s" %  count_click_loops)
-                self.logging.info("######## A new click begin here ...")
+                self.logging.info("count_click_loops : %s" %  count_click_loops)
+                self.logging.info("A new click begin here ...")
             except TimeoutException, e:
-                self.logging.info("######## wait error here ...")
-                self.logging.info("######## e: ", e)
-                self.logging.info("######## we will break the top while here,")
-                self.logging.info("######## hope no more to click then...")
+                self.logging.info("wait error here ...")
+                self.logging.info("e: ", e)
+                self.logging.info("we will break the top while here,")
+                self.logging.info("hope no more to click then...")
                 break
-            #print "#################after wait ... "
+            logging.info("############# after wait ... ")
 
             # a loop to wait for clickable of "show more" button.
             count_fail_click = 0
@@ -269,7 +279,8 @@ class RankingSpider(CrawlSpider):
                 try:
                     element.click()
                     self.logging.info("########## gona break, hey ...")
-                    self.logging.info("########## count_fail_click: %d" % count_fail_click)
+                    self.logging.info("########## count_fail_click: %d" \
+                                        % count_fail_click)
                     break
                 except WebDriverException, e:
                     self.logging.info("########## e: %s" % e)
@@ -278,8 +289,8 @@ class RankingSpider(CrawlSpider):
                     count_fail_click += 1
                     time.sleep(5)
 
-        self.logging.info("#### after click() ...")
-        self.logging.info("#### total of count_click_loops: %d" % count_click_loops)
+        self.logging.info("after click() ...")
+        self.logging.info("total of count_click_loops: %d" % count_click_loops)
         ###########################################
         # finish CLICKing showmore button function here.
         ###########################################

@@ -28,12 +28,13 @@ class TIMESrankingSpider(CrawlSpider):
         self.logging.info("==============================")
         self.logging.info("self.rule[start_urls]: %s" % self.rule["start_urls"])
         self.start_urls = self.rule["start_urls"]
-        #self.next_page_p = self.rule["next_page_p"]
-        self.next_page_click = self.rule["next_page_click"]
-        #self.total_pages = int(self.rule["total_pages"]) \
-        #                    if self.rule["total_pages"] else 1000000
-        #self.logging.info("self.total_pages: %s" % self.total_pages)
-        #self.logging.info("type of self.total_pages: %s" % type(self.total_pages))
+        # slef.next_page is a defined array.
+        self.next_page = self.rule["next_page"] \
+                            if ("next_page" in self.rule) else ["NONE"]
+        self.logging.info("#### self.next_page %s" % self.next_page)
+        self.flag = self.rule["flag"] \
+                            if ("flag" in self.rule) else ["NONE"]
+        self.logging.info("#### self.flag %s" % self.flag)
         self.worksheet = worksheet
         self.logging.info("Finish the __init__ method ... ")
 
@@ -60,16 +61,22 @@ class TIMESrankingSpider(CrawlSpider):
         # using browser to get url again ...
         logging.info("****SPECIAL INFO: the url which browser get is %s" % response.url)
         # NOW, change the response.url to self.start_urls[0]
-        #self.browser.get(response.url)
-        self.browser.get(self.start_urls[0])
+        #   get url from start_urls
+        #   & click ALL option, then all rows in one page
+        #   IN CONFIG:
+        #       "next_page": ["XPATH_CLICK", [xpath_to_click]],
+        if self.next_page[0] == "XPATH_CLICK":
+            self.browser.get(self.start_urls[0])
+            self.logging.info("#### CLICK ALL for TIMES ...")
+            self.browser.find_element_by_xpath(self.next_page[1][0]).click()
+        else:
+            self.browser.get(response.url)
+
         self.logging.info("#### got url ...")
         self.logging.info("#### response: %s" % response)
 
-        # add this to click ALL then all rows in one page
-        self.browser.find_element_by_xpath(self.next_page_click).click()
 
         browser_response = Selector(text = self.browser.page_source)
-        #browser_response = response
         logging.info("type(browser_response): %s" % type(browser_response))
 
         # broswer is ready now ...
@@ -87,7 +94,6 @@ class TIMESrankingSpider(CrawlSpider):
             for col in self.rule["columns"]:
                 if self.rule["columns"][col]["title"] != "None":
                     data = browser_response.xpath(self.rule["columns"][col]["title"]).extract()
-                    #print "data: ", data
                     self.worksheet.write(row_index, int(col)-1, data)
             row_index += 1
 
@@ -95,7 +101,6 @@ class TIMESrankingSpider(CrawlSpider):
         for select in browser_response.xpath(self.rule["table_tag"]):
             #logging.info("select: %s" % select)
             #logging.info("self.rule[\"columns\"]: %s" % self.rule["columns"])
-
             for col in self.rule["columns"]:
                 data = select.xpath(self.rule["columns"][col]["content"]).extract()
                 #logging.info("data: %s" % data)
@@ -105,45 +110,5 @@ class TIMESrankingSpider(CrawlSpider):
         crawld_pages += 1
         logging.info("finished crawling data of this page ...")
 
-#        # next_page need to be crawl ...
-#        # then do it
-#        #  AND this next_page is for usnews, url patten
-#        #  self.next_page_p =["url_pattern", "start_page", "end_page"]
-#        if self.next_page_p and ( crawld_pages < int(self.next_page_p[2]) ):
-#            # 字符串拼凑，替换NUM处的值
-#
-#        #if len(self.next_pages) > crawld_pages-1:
-#            #href = response.xpath(self.next_page)
-#            #logging.info("##### href: %s" % href)
-#            #logging.info("##### type(href): %s" % type(href))
-#            #if href:
-#            next_url = self.next_page_p[0].replace("NUM",  str(crawld_pages) )
-#            #next_url = self.next_pages[crawld_pages-1]
-#            request = scrapy.Request(next_url, callback=self.parse)
-#            request.meta['write_title'] = False
-#            request.meta['start_row'] = row_index
-#            request.meta['crawld_pages'] = crawld_pages
-#            return request
-#        else:
-#            logging.info("No more next_page to crawl ...")
-#            logging.info("I will quit my parse here ... Thanks ...")
-
-#        # next_page need to be crawl ...
-#        # then do it
-#        if len(self.next_pages) > crawld_pages-1:
-#            #href = response.xpath(self.next_page)
-#            #logging.info("##### href: %s" % href)
-#            #logging.info("##### type(href): %s" % type(href))
-#            #if href:
-#            next_url = self.next_pages[crawld_pages-1]
-#            request = scrapy.Request(next_url, callback=self.parse)
-#            request.meta['write_title'] = False
-#            request.meta['start_row'] = row_index
-#            request.meta['crawld_pages'] = crawld_pages
-#            return request
-#        else:
-#            logging.info("No more next_page to crawl ...")
-#            logging.info("I will quit my parse here ... Thanks ...")
-#
         self.logging.info("Finish the logic of parse method ... ")
 

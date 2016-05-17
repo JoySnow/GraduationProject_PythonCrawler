@@ -17,10 +17,7 @@ import logging
 
 class CUAArankingSpider(CrawlSpider):
     name = "cuaaranking"
-    #allow_domain = ["www.topuniversities.com"]
-    #start_urls = [
-    #        "http://www.topuniversities.com/university-rankings/world-university-rankings/2015#sorting=rank+region=+country=+faculty=+stars=false+search=",
-    #        ]
+
     def __init__(self, rule, worksheet, logging):
         CrawlSpider.__init__(self)
         # use any browser you wish
@@ -31,11 +28,13 @@ class CUAArankingSpider(CrawlSpider):
         self.logging.info("==============================")
         self.logging.info("self.rule[start_urls]: %s" % self.rule["start_urls"])
         self.start_urls = self.rule["start_urls"]
-        self.next_pages = self.rule["next_pages"]
-        #self.total_pages = int(self.rule["total_pages"]) \
-        #                    if self.rule["total_pages"] else 1000000
-        #self.logging.info("self.total_pages: %s" % self.total_pages)
-        #self.logging.info("type of self.total_pages: %s" % type(self.total_pages))
+        # slef.next_page is a defined array.
+        self.next_page = self.rule["next_page"] \
+                            if ("next_page" in self.rule) else ["NONE"]
+        self.logging.info("#### self.next_page %s" % self.next_page)
+        self.flag = self.rule["flag"] \
+                            if ("flag" in self.rule) else ["NONE"]
+        self.logging.info("#### self.flag %s" % self.flag)
         self.worksheet = worksheet
         self.logging.info("Finish the __init__ method ... ")
 
@@ -103,20 +102,25 @@ class CUAArankingSpider(CrawlSpider):
 
         # next_page need to be crawl ...
         # then do it
-        if len(self.next_pages) > crawld_pages-1:
-            #href = response.xpath(self.next_page)
-            #logging.info("##### href: %s" % href)
-            #logging.info("##### type(href): %s" % type(href))
-            #if href:
-            next_url = self.next_pages[crawld_pages-1]
-            request = scrapy.Request(next_url, callback=self.parse)
-            request.meta['write_title'] = False
-            request.meta['start_row'] = row_index
-            request.meta['crawld_pages'] = crawld_pages
-            return request
-        else:
-            logging.info("No more next_page to crawl ...")
-            logging.info("I will quit my parse here ... Thanks ...")
+
+        # For CUAA & NSEAC:
+        #   for each in url_list, go get it.
+        #   IN CONFIG:
+        #       "next_page": [
+        #           "URL_LIST",
+        #           ["url_1", "url_2", "url_n", ...]
+        #       ],
+        if self.next_page[0] == "URL_LIST":
+            if len(self.next_page[1]) > crawld_pages-1:
+                next_url = self.next_page[1][crawld_pages-1]
+                request = scrapy.Request(next_url, callback=self.parse)
+                request.meta['write_title'] = False
+                request.meta['start_row'] = row_index
+                request.meta['crawld_pages'] = crawld_pages
+                return request
+            else:
+                logging.info("No more next_page to crawl ...")
+                logging.info("I will quit my parse here ... Thanks ...")
 
         self.logging.info("Finish the logic of parse method ... ")
 

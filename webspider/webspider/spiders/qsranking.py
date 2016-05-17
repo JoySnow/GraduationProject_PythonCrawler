@@ -17,10 +17,7 @@ import logging
 
 class QSrankingSpider(CrawlSpider):
     name = "QSranking"
-    #allow_domain = ["www.topuniversities.com"]
-    #start_urls = [
-    #        "http://www.topuniversities.com/university-rankings/world-university-rankings/2015#sorting=rank+region=+country=+faculty=+stars=false+search=",
-    #        ]
+
     def __init__(self, rule, worksheet, logging):
         CrawlSpider.__init__(self)
         # use any browser you wish
@@ -30,7 +27,14 @@ class QSrankingSpider(CrawlSpider):
         self.name = self.rule["ranking_name"]
         self.logging.info("==============================")
         self.logging.info("self.rule[start_urls]: %s" % self.rule["start_urls"])
-        self.start_urls = [self.rule["start_urls"],]
+        self.start_urls = self.rule["start_urls"]
+        # slef.next_page is a defined array.
+        self.next_page = self.rule["next_page"] \
+                            if ("next_page" in self.rule) else ["NONE"]
+        self.logging.info("#### self.next_page %s" % self.next_page)
+        self.flag = self.rule["flag"] \
+                            if ("flag" in self.rule) else ["NONE"]
+        self.logging.info("#### self.flag %s" % self.flag)
         self.worksheet = worksheet
         self.logging.info("Finish the __init__ method ... ")
 
@@ -105,19 +109,55 @@ class QSrankingSpider(CrawlSpider):
             data = browser_response.xpath(self.rule["columns"][col]["title"]).extract()
             #print "data: ", data
             self.worksheet.write(row_index, int(col)-1, data)
+        row_index += 1
 
         # for the content of the table
-        row_index = 1
-        for select in browser_response.xpath(self.rule["table_tag"]):
-            logging.info("select: %s" % select)
-            logging.info("self.rule[\"columns\"]: %s" % self.rule["columns"])
-
-            for col in self.rule["columns"]:
-                data = select.xpath(self.rule["columns"][col]["content"]).extract()
-                logging.info("data: %s" % data)
-                self.worksheet.write(row_index, int(col)-1, data)
-            row_index += 1
-
+        if self.flag[0] != "NONE": # has special cell to reget in flag
+            if len(browser_response.xpath(self.rule["table_tag"])) == 0:
+                logging.info("SPECIAL: select is none here, url: %s" \
+                            % response.url)
+            for select in browser_response.xpath(self.rule["table_tag"]):
+                #logging.info("select: %s" % select)
+                #logging.info("self.rule[\"columns\"]: %s" \
+                #            % self.rule["columns"])
+                for col in self.rule["columns"]:
+                    data = select.xpath(\
+                            self.rule["columns"][col]["content"]).extract()
+                    # for QS and FUDAN:
+                    #   reget data for special content
+                    if "content_special" in self.flag[1] and data == [] \
+                            and col in self.flag[1]["content_special"][0]:
+                        data = select.xpath(self.rule["columns"]\
+                                [col]["content_for_special"]).extract()
+                        #logging.info("data: %s" % data)
+                    # for QS only:
+                    #   count stars for each star cell
+                    if self.flag[0] == "for_QS" \
+                            and "count_stars" in self.flag[1] and data != [] \
+                            and col in self.flag[1]["count_stars"][0]:
+                        #logging.info("star col data: %s" % data)
+                        if "plus" in data[-1]:
+                            data = [ str(len(data)-1), "+"]
+                        else:
+                            data = [ str(len(data)), ]
+                        #logging.info("star col data: %s" % data)
+                    # store data to sheet
+                    self.worksheet.write(row_index, int(col)-1, data)
+                row_index += 1
+        else: # self.flag[0] is "NONE"
+            if len(browser_response.xpath(self.rule["table_tag"])) == 0:
+                logging.info("SPECIAL: select is none here, url: %s" \
+                            % response.url)
+            for select in browser_response.xpath(self.rule["table_tag"]):
+                #logging.info("select: %s" % select)
+                #logging.info("self.rule[\"columns\"]: %s" \
+                #            % self.rule["columns"])
+                for col in self.rule["columns"]:
+                    data = select.xpath(\
+                            self.rule["columns"][col]["content"]).extract()
+                    #logging.info("data: %s" % data)
+                    self.worksheet.write(row_index, int(col)-1, data)
+                row_index += 1
 
         self.logging.info("Finish the logic of parse method ... ")
 

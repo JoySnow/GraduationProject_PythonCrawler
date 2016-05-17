@@ -17,10 +17,7 @@ import logging
 
 class WOrankingSpider(CrawlSpider):
     name = "WOranking"
-    #allow_domain = ["www.topuniversities.com"]
-    #start_urls = [
-    #        "http://www.topuniversities.com/university-rankings/world-university-rankings/2015#sorting=rank+region=+country=+faculty=+stars=false+search=",
-    #        ]
+
     def __init__(self, rule, worksheet, logging):
         CrawlSpider.__init__(self)
         # use any browser you wish
@@ -30,12 +27,14 @@ class WOrankingSpider(CrawlSpider):
         self.name = self.rule["ranking_name"]
         self.logging.info("==============================")
         self.logging.info("self.rule[start_urls]: %s" % self.rule["start_urls"])
-        self.start_urls = [self.rule["start_urls"],]
-        self.next_page = self.rule["next_page"]
-        self.total_pages = int(self.rule["total_pages"]) \
-                            if self.rule["total_pages"] else 1000000
-        self.logging.info("self.total_pages: %s" % self.total_pages)
-        self.logging.info("type of self.total_pages: %s" % type(self.total_pages))
+        self.start_urls = self.rule["start_urls"]
+        # slef.next_page is a defined array.
+        self.next_page = self.rule["next_page"] \
+                            if ("next_page" in self.rule) else ["NONE"]
+        self.logging.info("#### self.next_page %s" % self.next_page)
+        self.flag = self.rule["flag"] \
+                            if ("flag" in self.rule) else ["NONE"]
+        self.logging.info("#### self.flag %s" % self.flag)
         self.worksheet = worksheet
         self.logging.info("Finish the __init__ method ... ")
 
@@ -63,51 +62,6 @@ class WOrankingSpider(CrawlSpider):
         self.browser.get(response.url)
         self.logging.info("#### got url ...")
         self.logging.info("#### response: %s" % response)
-#
-#
-#        ###########################################
-#        # keep on click the "show more button",
-#        # until we get the whole table in broswer.
-#        ###########################################
-#        count_click_loops = 0
-#        while(1):
-#
-#            try:
-#                wait = WebDriverWait(self.browser, 20)
-#                element = \
-#                     wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="ranking-wp"]/p/a')))
-#                count_click_loops += 1
-#                self.logging.info("######## count_click_loops : %s" %  count_click_loops)
-#                self.logging.info("######## A new click begin here ...")
-#            except TimeoutException, e:
-#                self.logging.info("######## wait error here ...")
-#                self.logging.info("######## e: ", e)
-#                self.logging.info("######## we will break the top while here,")
-#                self.logging.info("######## hope no more to click then...")
-#                break
-#            #print "#################after wait ... "
-#
-#            # a loop to wait for clickable of "show more" button.
-#            count_fail_click = 0
-#            while(1):
-#                try:
-#                    element.click()
-#                    self.logging.info("########## gona break, hey ...")
-#                    self.logging.info("########## count_fail_click: %d" % count_fail_click)
-#                    break
-#                except WebDriverException, e:
-#                    self.logging.info("########## e: %s" % e)
-#                    self.logging.info("bad luck this time,")
-#                    self.logging.info("try again later ...")
-#                    count_fail_click += 1
-#                    time.sleep(5)
-#
-#        self.logging.info("#### after click() ...")
-#        self.logging.info("#### total of count_click_loops: %d" % count_click_loops)
-#        ###########################################
-#        # finish this function here.
-#        ###########################################
-#
 
         browser_response = Selector(text = self.browser.page_source)
         #browser_response = response
@@ -147,20 +101,29 @@ class WOrankingSpider(CrawlSpider):
 
         # next_page need to be crawl ...
         # then do it
-        if ( crawld_pages < self.total_pages ) and self.next_page:
-            href = response.xpath(self.next_page)
-            logging.info("##### href: %s" % href)
-            logging.info("##### type(href): %s" % type(href))
-            if href:
-                next_url = response.urljoin(href[0].extract())
-                request = scrapy.Request(next_url, callback=self.parse)
-                request.meta['write_title'] = False
-                request.meta['start_row'] = row_index
-                request.meta['crawld_pages'] = crawld_pages
-                return request
-            else:
-                logging.info("No more next_page to crawl ...")
-                logging.info("I will quit my parse here ... Thanks ...")
+
+        # For WO only:
+        #   find url by xpath, and loop total_num times
+        #   IN CONFIG:
+        #       "next_page": [
+        #           "XPATH_URL",
+        #           ["xpath_url", "total_num"]
+        #       ],
+        if self.next_page[0] == "XPATH_URL":
+            if crawld_pages < int(self.next_page[1][1]):
+                href = response.xpath(self.next_page[1][0])
+                logging.info("##### href: %s" % href)
+                logging.info("##### type(href): %s" % type(href))
+                if href:
+                    next_url = response.urljoin(href[0].extract())
+                    request = scrapy.Request(next_url, callback=self.parse)
+                    request.meta['write_title'] = False
+                    request.meta['start_row'] = row_index
+                    request.meta['crawld_pages'] = crawld_pages
+                    return request
+                else:
+                    logging.info("No more next_page to crawl ...")
+                    logging.info("I will quit my parse here ... Thanks ...")
 
         self.logging.info("Finish the logic of parse method ... ")
 

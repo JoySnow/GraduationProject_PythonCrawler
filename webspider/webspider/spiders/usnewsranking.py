@@ -28,11 +28,13 @@ class USNEWSrankingSpider(CrawlSpider):
         self.logging.info("==============================")
         self.logging.info("self.rule[start_urls]: %s" % self.rule["start_urls"])
         self.start_urls = self.rule["start_urls"]
-        self.next_page_p = self.rule["next_page_p"]
-        #self.total_pages = int(self.rule["total_pages"]) \
-        #                    if self.rule["total_pages"] else 1000000
-        #self.logging.info("self.total_pages: %s" % self.total_pages)
-        #self.logging.info("type of self.total_pages: %s" % type(self.total_pages))
+        # slef.next_page is a defined array.
+        self.next_page = self.rule["next_page"] \
+                            if ("next_page" in self.rule) else ["NONE"]
+        self.logging.info("#### self.next_page %s" % self.next_page)
+        self.flag = self.rule["flag"] \
+                            if ("flag" in self.rule) else ["NONE"]
+        self.logging.info("#### self.flag %s" % self.flag)
         self.worksheet = worksheet
         self.logging.info("Finish the __init__ method ... ")
 
@@ -89,7 +91,6 @@ class USNEWSrankingSpider(CrawlSpider):
         for select in browser_response.xpath(self.rule["table_tag"]):
             #logging.info("select: %s" % select)
             #logging.info("self.rule[\"columns\"]: %s" % self.rule["columns"])
-
             for col in self.rule["columns"]:
                 data = select.xpath(self.rule["columns"][col]["content"]).extract()
                 #logging.info("data: %s" % data)
@@ -101,43 +102,28 @@ class USNEWSrankingSpider(CrawlSpider):
 
         # next_page need to be crawl ...
         # then do it
-        #  AND this next_page is for usnews, url patten
-        #  self.next_page_p =["url_pattern", "start_page", "end_page"]
-        if self.next_page_p and ( crawld_pages < int(self.next_page_p[2]) ):
-            # 字符串拼凑，替换NUM处的值
 
-        #if len(self.next_pages) > crawld_pages-1:
-            #href = response.xpath(self.next_page)
-            #logging.info("##### href: %s" % href)
-            #logging.info("##### type(href): %s" % type(href))
-            #if href:
-            next_url = self.next_page_p[0].replace("NUM",  str(crawld_pages+1) )
-            #next_url = self.next_pages[crawld_pages-1]
-            request = scrapy.Request(next_url, callback=self.parse)
-            request.meta['write_title'] = False
-            request.meta['start_row'] = row_index
-            request.meta['crawld_pages'] = crawld_pages
-            return request
-        else:
-            logging.info("No more next_page to crawl ...")
-            logging.info("I will quit my parse here ... Thanks ...")
+        # For USNEWS only:
+        #   show start and end page number in url to replace NUM
+        #   IN CONFIG:
+        #       "next_page": [
+        #           "URL_PATTERN",
+        #           ["url_pattern", "start_page", "end_page"]
+        #       ],
+        if self.next_page[0] == "URL_PATTERN":
+            if self.next_page[1] and (crawld_pages < int(self.next_page[1][2])):
+                # replace NUM in url_pattern with page_number in range
+                # AND assume that NUM in url_pattern here
+                next_url = self.next_page[1][0].replace(\
+                                                "NUM", str(crawld_pages+1))
+                request = scrapy.Request(next_url, callback=self.parse)
+                request.meta['write_title'] = False
+                request.meta['start_row'] = row_index
+                request.meta['crawld_pages'] = crawld_pages
+                return request
+            else:
+                logging.info("No more next_page to crawl ...")
+                logging.info("I will quit my parse here ... Thanks ...")
 
-#        # next_page need to be crawl ...
-#        # then do it
-#        if len(self.next_pages) > crawld_pages-1:
-#            #href = response.xpath(self.next_page)
-#            #logging.info("##### href: %s" % href)
-#            #logging.info("##### type(href): %s" % type(href))
-#            #if href:
-#            next_url = self.next_pages[crawld_pages-1]
-#            request = scrapy.Request(next_url, callback=self.parse)
-#            request.meta['write_title'] = False
-#            request.meta['start_row'] = row_index
-#            request.meta['crawld_pages'] = crawld_pages
-#            return request
-#        else:
-#            logging.info("No more next_page to crawl ...")
-#            logging.info("I will quit my parse here ... Thanks ...")
-#
         self.logging.info("Finish the logic of parse method ... ")
 
