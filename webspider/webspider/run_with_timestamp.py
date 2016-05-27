@@ -15,11 +15,11 @@ import logging
 
 ISOTIMEFORMAT='%Y%m%d%H%M%S'
 
-report_filename = "./report/report.txt"
+report_filename = "./report/report-" + str(time.strftime(ISOTIMEFORMAT)) + ".txt"
 report_fp = open(report_filename, "a+")
 report_fp.write("These are urls that had tryed five times in process but still need reget:\n")
 
-log_filename = "./log/rankingspider.log"
+log_filename = "./log/rankingspider-" + str(time.strftime(ISOTIMEFORMAT)) + ".log"
 
 logging.basicConfig(level=logging.INFO, filename=log_filename)
 logging.info("=============================================================")
@@ -107,7 +107,7 @@ process.start() # the script will block here until the crawling is finished
 logging.info("before save workbook ...")
 #workbook.save("ShanghaiRanking.xls")
 for workbook in WorkBooks:
-    xls_filename = "./excels/" + workbook + "ranking.xls"
+    xls_filename = "./excels/" + workbook + "ranking-" + str(time.strftime(ISOTIMEFORMAT)) + ".xls"
     WorkBooks[workbook].save(xls_filename)
     logging.info("WorkBooks saving in %s" % xls_filename)
 logging.info("after save workbook ...")

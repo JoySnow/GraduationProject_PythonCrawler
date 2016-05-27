@@ -17,7 +17,7 @@ import logging
 class RankingSpider(CrawlSpider):
     name = "ranking"
 
-    def __init__(self, rule, worksheet, logging):
+    def __init__(self, rule, worksheet, logging, report_fp):
         CrawlSpider.__init__(self)
         # use any browser you wish
         self.browser = webdriver.Firefox()
@@ -35,6 +35,7 @@ class RankingSpider(CrawlSpider):
                             if ("flag" in self.rule) else ["NONE"]
         self.logging.info("#### self.flag %s" % self.flag)
         self.worksheet = worksheet
+        self.report_fp = report_fp
         self.logging.info("Finish the __init__ method ... ")
 
     def __del__(self):
@@ -79,19 +80,25 @@ class RankingSpider(CrawlSpider):
         retry_times = 5
         while(retry_times):
             try:
-                self.browser.find_element_by_id("errorTryAgain")
-                self.logging.info("########## refresh page ...")
+                content = self.browser.find_element_by_xpath(self.rule["table_tag"])
+                self.logging.info("SPECIAL: content in try here, content: %s" \
+                                % content)
+                self.logging.info("########## break while ...")
+                break
+            except Exception,e:
+                self.logging.info("SPECIAL: in Exception here ...")
+                self.logging.info("########## errorhere: %s" % e)
+                self.logging.info("########## need refresh page ...")
                 self.logging.info("########## response.url %s" % response.url)
                 time.sleep(10)
                 self.browser.refresh()
                 retry_times -= 1
-            except Exception,e:
-                self.logging.info("########## errorhere: %s" % e)
-                self.logging.info("########## break while ...")
-                break
+
         # still failed to get right data of this page
         if retry_times == 0:
             self.logging.info("****Need retry for url: %s" % response.url)
+            self.report_fp.write("in ranking " + self.name + \
+                    " -> " + response.url + "\n")
 
         self.logging.info("#### got url with browser ...")
 
@@ -130,10 +137,18 @@ class RankingSpider(CrawlSpider):
             row_index += 1
 
         # for the content of the table
+
+        # if the table still empty, that means had after 5 times retry
+        # so we add the missing page's url in EXCEL file
+        if len(browser_response.xpath(self.rule["table_tag"])) == 0:
+            self.logging.info("SPECIAL: select is none here, url: %s" \
+                        % response.url)
+            data = "This url need reget : " + response.url
+            self.worksheet.write(row_index, 0, data)
+            row_index += 1
+            #self.report_fp.write("This url need reget: " + response.url + "\n")
+        # the table unempty status
         if self.flag[0] != "NONE": # has special cell to reget in flag
-            if len(browser_response.xpath(self.rule["table_tag"])) == 0:
-                self.logging.info("SPECIAL: select is none here, url: %s" \
-                            % response.url)
             for select in browser_response.xpath(self.rule["table_tag"]):
                 #logging.info("select: %s" % select)
                 #logging.info("self.rule[\"columns\"]: %s" \
@@ -163,9 +178,6 @@ class RankingSpider(CrawlSpider):
                     self.worksheet.write(row_index, int(col)-1, data)
                 row_index += 1
         else: # self.flag[0] is "NONE"
-            if len(browser_response.xpath(self.rule["table_tag"])) == 0:
-                logging.info("SPECIAL: select is none here, url: %s" \
-                            % response.url)
             for select in browser_response.xpath(self.rule["table_tag"]):
                 #logging.info("select: %s" % select)
                 #logging.info("self.rule[\"columns\"]: %s" \

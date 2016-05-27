@@ -7,7 +7,7 @@ while [[ $cnt > 0 ]]
 do
     echo $cnt >> ./test.log
     #python ./hehe.py
-    python ../run_tmp.py
+    python ./run.py
     echo "before sleep ..." >> ./test.log
     sleep 60
     echo "after sleep ..." >> ./test.log

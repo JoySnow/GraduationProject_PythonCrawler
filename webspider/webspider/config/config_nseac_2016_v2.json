@@ -3,7 +3,7 @@
     "CHINAUR-nseac2016": {
         "start_urls": ["http://www.nseac.com/html/263/676578.html"],
         "next_page": [
-                "URL_LIST", 
+                "URL_LIST",
                 ["http://www.nseac.com/html/263/676578_2.html",
                     "http://www.nseac.com/html/263/676578_3.html",
                     "http://www.nseac.com/html/263/676578_4.html",
@@ -19,7 +19,7 @@
                     "http://www.nseac.com/html/263/676580_2.html",
                     "http://www.nseac.com/html/263/676580_3.html",
                     "http://www.nseac.com/html/263/676580_4.html" ]
-        ],        
+        ],
         "ranking_name": "CNURnseac2016",
         "table_tag": "/html/body/div[@class=\"container\"][3]/div/div[1]/div[1]/table[1]/tbody/tr/td/table/tbody/tr[position()>1]",
 		"columns": {
@@ -70,7 +70,7 @@
             "3": {
                 "content": "td[3]/text()",
                 "title": "/html/body/div[@class=\"container\"][3]/div/div[1]/div[1]/table[1]/tbody/tr/td/center/div/table/tbody/tr[1]/td[3]/center/font/b/text()"
-            }  
+            }
         }
     },
     "CLMED-nseac2016": {
@@ -94,7 +94,7 @@
 			"4": {
                 "content": "td[4]/text()",
                 "title": "/html/body/div[@class=\"container\"][3]/div/div[1]/div[1]/table[1]/tbody/tr/td/center/div/table/tbody/tr[1]/td[4]/center/font/b/text()"
-            }			
+            }
         }
     }
 }
